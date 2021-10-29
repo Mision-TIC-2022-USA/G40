@@ -22,4 +22,8 @@ public class ClienteRepository {
     public List<ClienteModel> getAll() {
         return (List<ClienteModel>) clienteCrudRepository.findAll();
     }
+    
+    public ClienteModel save(ClienteModel clienteModel ) {
+        return clienteCrudRepository.save(clienteModel);
+    }
 }

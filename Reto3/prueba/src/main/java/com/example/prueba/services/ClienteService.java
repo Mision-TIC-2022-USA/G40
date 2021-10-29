@@ -23,4 +23,14 @@ public class ClienteService {
     public List<ClienteModel> getAllClientes() {
         return (List<ClienteModel>) clienteRepository.getAll();
     }
+    
+    public ClienteModel save(ClienteModel clienteModel) {
+        
+        
+        if(clienteModel.getId() == null)
+            return clienteRepository.save(clienteModel);    
+         
+        return clienteModel;
+        
+    }
 }
