@@ -50,6 +50,10 @@ function GuardarRegistro() {
         contentType: "application/json",
         success: function (json) {
             traerInformacion();
+            $("#id").val("");
+            $("#nombre").val("");
+            $("#cedula").val("");
+            $("#celular").val("");
         },
         error: function (xhr, status) {
             console.log(status);
