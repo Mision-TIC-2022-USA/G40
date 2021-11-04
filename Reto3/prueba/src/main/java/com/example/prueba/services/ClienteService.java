@@ -7,6 +7,7 @@ package com.example.prueba.services;
 import com.example.prueba.models.ClienteModel;
 import com.example.prueba.repositories.ClienteRepository;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,7 +30,12 @@ public class ClienteService {
         
         if(clienteModel.getId() == null)
             return clienteRepository.save(clienteModel);    
-         
+        
+        Optional<ClienteModel> clientedb =  clienteRepository.getClientById(clienteModel.getId());
+        
+        if(clientedb.isEmpty())
+            return clienteRepository.save(clienteModel);   
+        
         return clienteModel;
         
     }

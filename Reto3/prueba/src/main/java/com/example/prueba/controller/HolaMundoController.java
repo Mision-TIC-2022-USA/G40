@@ -41,5 +41,4 @@ public class HolaMundoController {
         ResponseEntity entity = new ResponseEntity(clienteModel,HttpStatus.CREATED);
         return entity;
     }
-    
 }
