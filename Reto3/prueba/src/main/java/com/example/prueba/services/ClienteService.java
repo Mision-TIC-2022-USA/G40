@@ -27,7 +27,6 @@ public class ClienteService {
     
     public ClienteModel save(ClienteModel clienteModel) {
         
-        
         if(clienteModel.getId() == null)
             return clienteRepository.save(clienteModel);    
         

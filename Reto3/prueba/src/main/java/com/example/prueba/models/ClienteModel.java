@@ -32,7 +32,7 @@ public class ClienteModel implements Serializable{
     private String password;
     private String name;
     private int age;
-
+    
     public ClienteModel() {
     }
 
