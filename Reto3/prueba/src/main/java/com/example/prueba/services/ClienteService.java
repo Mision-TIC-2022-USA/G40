@@ -24,18 +24,36 @@ public class ClienteService {
     public List<ClienteModel> getAllClientes() {
         return (List<ClienteModel>) clienteRepository.getAll();
     }
-    
+
     public ClienteModel save(ClienteModel clienteModel) {
-        
-        if(clienteModel.getId() == null)
-            return clienteRepository.save(clienteModel);    
-        
-        Optional<ClienteModel> clientedb =  clienteRepository.getClientById(clienteModel.getId());
-        
-        if(clientedb.isEmpty())
-            return clienteRepository.save(clienteModel);   
-        
+
+        if (clienteModel.getId() == null) {
+            return clienteRepository.save(clienteModel);
+        }
+
+        Optional<ClienteModel> clientedb = clienteRepository.getClientById(clienteModel.getId());
+
+        if (clientedb.isEmpty()) {
+            return clienteRepository.save(clienteModel);
+        }
+
         return clienteModel;
+    }
+
+    public ClienteModel getClientById(Integer id) {
         
+        Optional<ClienteModel> result = clienteRepository.getClientById(id);
+        if(result.isEmpty())
+            return null;
+        return result.orElse(null);
+    }
+
+    public boolean delete(Integer id) {
+        try {
+            clienteRepository.delete(id);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 }

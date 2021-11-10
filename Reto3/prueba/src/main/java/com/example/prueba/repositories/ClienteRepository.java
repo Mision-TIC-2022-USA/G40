@@ -24,13 +24,16 @@ public class ClienteRepository {
     public List<ClienteModel> getAll() {
         return (List<ClienteModel>) clienteCrudRepository.findAll();
     }
-    
-    public ClienteModel save(ClienteModel clienteModel ) {
+
+    public ClienteModel save(ClienteModel clienteModel) {
         return clienteCrudRepository.save(clienteModel);
     }
-    
-    public Optional<ClienteModel> getClientById(int id)
-    {
-      return clienteCrudRepository.findById(id);
+
+    public Optional<ClienteModel> getClientById(int id) {
+        return clienteCrudRepository.findById(id);
+    }
+
+    public void delete(Integer id) {
+        clienteCrudRepository.deleteById(id);
     }
 }
