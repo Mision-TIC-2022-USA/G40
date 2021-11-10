@@ -27,46 +27,37 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/Client")
 public class HolaMundoController {
-    
+
     @Autowired
     private ClienteService clienteService;
-    
+
     @GetMapping("/all")
-    public List<ClienteModel> getAll()
-    {
+    public List<ClienteModel> getAll() {
         return clienteService.getAllClientes();
     }
-    
+
     @PostMapping("/save")
-    public ResponseEntity<ClienteModel> save(@RequestBody ClienteModel clienteModel)
-    {
-        clienteService.save(clienteModel);
-        ResponseEntity entity = new ResponseEntity(clienteModel,HttpStatus.CREATED);
-        return entity;
+    public ResponseEntity<ClienteModel> save(@RequestBody ClienteModel clienteModel) {
+        ClienteModel result = clienteService.save(clienteModel);
+        return new ResponseEntity(result, HttpStatus.CREATED);
     }
-    
-    @GetMapping("{id}")
-    public ResponseEntity<ClienteModel> getClientById(@PathVariable Integer id)
-    {
-       ClienteModel result = clienteService.getClientById(id);
-       
-       if(result == null)
-           return new ResponseEntity<>(result,HttpStatus.NOT_FOUND);
-       
-        return new ResponseEntity<>(result,HttpStatus.OK);
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ClienteModel> getClientById(@PathVariable Integer id) {
+        ClienteModel result = clienteService.getClientById(id);
+
+        HttpStatus status = (result == null ? HttpStatus.NO_CONTENT : HttpStatus.OK);
+
+        return new ResponseEntity<>(result, status);
     }
-    
-    @DeleteMapping("{id}")
-    public ResponseEntity<Boolean> delete(@PathVariable Integer id)
-    {
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Boolean> delete(@PathVariable Integer id) {
         boolean result = clienteService.delete(id);
-        
-        if(!result)
-            return new ResponseEntity<>(result,HttpStatus.NO_CONTENT);
-                    
-      
-         return new ResponseEntity<>(result,HttpStatus.OK);
+
+        HttpStatus status = (result == false ? HttpStatus.NO_CONTENT : HttpStatus.OK);
+
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
-    
+
 }
-    

@@ -45,7 +45,7 @@ public class ClienteService {
         Optional<ClienteModel> result = clienteRepository.getClientById(id);
         if(result.isEmpty())
             return null;
-        return result.orElse(null);
+        return result.get();
     }
 
     public boolean delete(Integer id) {
